@@ -14,6 +14,7 @@ load_rc_config $name
 : ${heartbeat_enable:=no} 
 : ${heartbeat_device:="/dev/led/act"}
 : ${heartbeat_sample:="sAaABba"}
+: ${heartbeat_off:="0"}
 
 hstart()
 {
@@ -22,7 +23,7 @@ hstart()
 
 hstop()
 {
-	$ECHO 0 > "$heartbeat_device"
+	$ECHO "$heartbeat_off" > "$heartbeat_device"
 }
 
 run_rc_command "$1"
