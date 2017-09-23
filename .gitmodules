@@ -1,0 +1,3 @@
+[submodule "bmp085-driver"]
+	path = bmp085-driver
+	url = git@github.com:part1zano/bmp085-driver.git
