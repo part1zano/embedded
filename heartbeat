@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# PROVIDE: heartbeat
+
+. /etc/rc.subr
+
+name="heartbeat"
+rcvar="heartbeat_enable"
+start_cmd="hstart"
+stop_cmd="hstop"
+ECHO="/bin/echo"
+
+load_rc_config $name
+: ${heartbeat_enable:=no} 
+: ${heartbeat_device:="/dev/led/act"}
+: ${heartbeat_sample:="sAaABba"}
+
+hstart()
+{
+	$ECHO "$heartbeat_sample" > "$heartbeat_device"
+}
+
+hstop()
+{
+	$ECHO 0 > "$heartbeat_device"
+}
+
+run_rc_command "$1"
