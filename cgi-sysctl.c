@@ -15,11 +15,11 @@ int main(int argc, char **argv) {
 
 	printf("Content-Type: text/html, charset=us-ascii\n\n");
 	printf("<html><head><title>Temperature and pressure at home</title></head><body>\n");
-	printf("<table><tr><td>Sensor</td><td>Temperature</td><td>Pressure</td></tr>\n");
+	printf("<center><table width=\"%s\"><tr><td>Sensor</td><td>Temperature</td><td>Pressure</td></tr>\n", "30%");
 	printf("<tr><td>bmp085 </td><td> %3.3f", (bmp085temp-2731.5f)/10.0f);
 	printf("<td> %d</td></tr>\n", bmp085pressure);
 	printf("<tr><td>ds18b20</td><td> %3.3f\n</td><td> ----- </td></tr>\n", (ds18b20temp-273150)/1000.0f);
-	printf("</table>\n");
+	printf("</table></center>\n");
 	printf("</html>");
 	return 0;
 }
