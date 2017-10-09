@@ -10,6 +10,8 @@ int main(int argc, char **argv) {
 	char *data;
 	unsigned short do_json=0;
 	size_t len = sizeof(int);
+	
+	int refresh_time = 10; // refresh every ten seconds
 
 	sysctlbyname("dev.bmp085.0.temperature", &bmp085temp, &len, NULL, 0);
 	sysctlbyname("dev.bmp085.0.pressure", &bmp085pressure, &len, NULL, 0);
@@ -17,11 +19,12 @@ int main(int argc, char **argv) {
 	
 
 	data = getenv("QUERY_STRING");
-	if (data == NULL) {
-		do_json = 0;
-	} else {
+	if (data != NULL) {
 		if (strstr(data, "json") != NULL) {
 			do_json = 1;
+		}
+		if (sscanf("refresh=%d", data, &refresh_time) != 1) {
+			// pass
 		}
 	}
 	if (do_json) {
@@ -35,6 +38,7 @@ int main(int argc, char **argv) {
 	} else {
 		printf("Content-Type: text/html, charset=utf-8\n\n");
 		
+		printf("<meta http-equiv=\"refresh\" content=\"%d\" />\n", refresh_time);
 		printf("<html><head><title>Temperature and pressure at home</title></head><body>\n");
 		printf("<center><table width=\"%s\"><tr><td>Sensor</td><td>Temperature</td><td>Pressure</td></tr>\n", "30%");
 
