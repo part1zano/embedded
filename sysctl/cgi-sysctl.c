@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 	unsigned short do_json=0;
 	size_t len = sizeof(int);
 	
-	int refresh_time = 10; // refresh every ten seconds
+	int refresh_time = 0; // don't refresh at all
 	int say_kurwa = 0;
 
 	sysctlbyname("dev.bmp085.0.temperature", &bmp085temp, &len, NULL, 0);
@@ -43,7 +43,9 @@ int main(int argc, char **argv) {
 			printf("\n<!-- %s -->\n\n\n", strstr(data, "refresh"));
 		}
 		
-		printf("<meta http-equiv=\"refresh\" content=\"%d\" />\n", refresh_time);
+		if (refresh_time) {
+			printf("<meta http-equiv=\"refresh\" content=\"%d\" />\n", refresh_time);
+		}
 		printf("<html><head><title>Temperature and pressure at home</title></head><body>\n");
 		printf("<center><table width=\"%s\"><tr><td>Sensor</td><td>Temperature</td><td>Pressure</td></tr>\n", "30%");
 
