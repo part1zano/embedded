@@ -12,6 +12,7 @@ int main(int argc, char **argv) {
 	size_t len = sizeof(int);
 	
 	int refresh_time = 10; // refresh every ten seconds
+	int say_kurwa = 0;
 
 	sysctlbyname("dev.bmp085.0.temperature", &bmp085temp, &len, NULL, 0);
 	sysctlbyname("dev.bmp085.0.pressure", &bmp085pressure, &len, NULL, 0);
@@ -23,8 +24,8 @@ int main(int argc, char **argv) {
 		if (strstr(data, "json") != NULL) {
 			do_json = 1;
 		}
-		if (sscanf("refresh=%d", data, &refresh_time) != 1) {
-			// pass
+		if (sscanf(data, "refresh=%d", &refresh_time) != 1) {
+			// say_kurwa = 1;
 		}
 	}
 	if (do_json) {
@@ -37,6 +38,10 @@ int main(int argc, char **argv) {
 				);
 	} else {
 		printf("Content-Type: text/html, charset=utf-8\n\n");
+		if (say_kurwa) {
+			printf("\n\n\n<!-- KURWA TWOJA MAC!!! --->\n");
+			printf("\n<!-- %s -->\n\n\n", strstr(data, "refresh"));
+		}
 		
 		printf("<meta http-equiv=\"refresh\" content=\"%d\" />\n", refresh_time);
 		printf("<html><head><title>Temperature and pressure at home</title></head><body>\n");
