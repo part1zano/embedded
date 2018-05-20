@@ -18,11 +18,13 @@ load_rc_config $name
 
 hstart()
 {
+	$ECHO "Starting heartbeat.."
 	$ECHO "$heartbeat_sample" > "$heartbeat_device"
 }
 
 hstop()
 {
+	$ECHO "Stopping heartbeat.."
 	$ECHO "$heartbeat_off" > "$heartbeat_device"
 }
 

@@ -47,11 +47,11 @@ int main(int argc, char **argv) {
 			printf("<meta http-equiv=\"refresh\" content=\"%d\" />\n", refresh_time);
 		}
 		printf("<html><head><title>Temperature and pressure at home</title></head><body>\n");
-		printf("<center><table width=\"%s\"><tr><td>Sensor</td><td>Temperature</td><td>Pressure</td></tr>\n", "30%");
+		printf("<center><table width=\"%s\"><tr><td>Sensor</td><td>Temperature</td><td>Pressure</td><td>Humidity</td></tr>\n", "30%");
 
 		printf("<tr><td>bmp085 </td><td> %3.3f", (bmp085temp-2731.5f)/10.0f);
-		printf("<td> %d</td></tr>\n", bmp085pressure);
-		printf("<tr><td>ds18b20</td><td> %3.3f\n</td><td> ----- </td></tr>\n", (ds18b20temp-273150)/1000.0f);
+		printf("<td> %d</td><td>-----</td></tr>\n", bmp085pressure);
+		printf("<tr><td>ds18b20</td><td> %3.3f\n</td><td> ----- </td><td>-----</td></tr>\n", (ds18b20temp-273150)/1000.0f);
 
 		printf("</table></center>\n");
 		printf("</html>");
