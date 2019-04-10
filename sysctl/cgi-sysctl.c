@@ -27,6 +27,9 @@ int main(int argc, char **argv) {
 		if (sscanf(data, "refresh=%d", &refresh_time) != 1) {
 			// say_kurwa = 1;
 		}
+		if (sscanf(data, "say_kurwa=%d", &say_kurwa) != 1) {
+			say_kurwa = 1;
+		}
 	}
 	if (do_json) {
 		printf("Content-Type: application/json, charset=utf-8\n\n");

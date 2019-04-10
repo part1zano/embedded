@@ -1,0 +1,14 @@
+---
+- hosts: all
+  tasks:
+      - name: fetch git
+        git:
+            repo: https://github.com/part1zano/embedded.git
+            recursive: no
+            dest: "{{ ansible_env.HOME }}/git/embedded"
+
+      - name: build & install
+        cmake:
+            source_dir: "{{ ansible_env.HOME }}/git/embedded/sysctl"
+            binary_dir: "{{ ansible_env.HOME }}/git/embedded/sysctl/bin"
+            target: install
