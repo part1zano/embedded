@@ -2,12 +2,22 @@
 - hosts: all
   tasks:
       - name: fetch git
+        notify: build
         git:
             repo: https://github.com/part1zano/embedded.git
             recursive: no
             dest: "{{ ansible_env.HOME }}/git/embedded"
 
+  handlers:
+
+      - name: create build dir
+        listen: build
+        file:
+            state: directory
+            path: "{{ ansible_env.HOME }}/git/embedded/sysctl/bin"
+
       - name: build and install
+        listen: build
         become: yes
         cmake:
             source_dir: "{{ ansible_env.HOME }}/git/embedded/sysctl"
