@@ -1,0 +1,15 @@
+- hosts: all
+  become: yes
+  tasks:
+      - name: deploy heartbeat
+        template:
+            src: heartbeat
+            dst: "{{ PREFIX }}/etc/rc.d/heartbeat"
+            mode: 0755
+        vars:
+            - PREFIX: "/usr/local"
+
+      - name: ensure the service is here
+        service:
+            name: heartbeat
+            state: restarted
